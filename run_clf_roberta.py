@@ -2,6 +2,7 @@
 
 '''Setups'''
 import os
+import zipfile
 import torch
 import numpy as np
 import pandas as pd
@@ -24,16 +25,15 @@ os.environ["WORLD_SIZE"] = "1"
 # discarded code
 '''
 !wget https://raw.githubusercontent.com/huggingface/transformers/main/tests/deepspeed/ds_config_zero3.json
-!wget http://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip
 
-import zipfile
-with zipfile.ZipFile("trainingandtestdata.zip","r") as zip_ref:
-    zip_ref.extractall("./data/")
+
+
 '''
-
+with zipfile.ZipFile("/scratch/yl5865/ds301_final_project/trainingandtestdata.zip","r") as zip_ref:
+    zip_ref.extractall("/scratch/yl5865/ds301_final_project/data/")
 
 '''Read-in the Training Tweets'''
-raw_data_df = pd.read_csv("data/training.1600000.processed.noemoticon.csv",encoding="ISO-8859-1")
+raw_data_df = pd.read_csv("/scratch/yl5865/ds301_final_project/data/training.1600000.processed.noemoticon.csv",encoding="ISO-8859-1")
 raw_data_df.columns = ["labels","ids","date","query","user","tweets"]
 data_df = raw_data_df.drop(["ids","date","query","user"],axis=1)
 data_df["labels"] = data_df["labels"]/4
