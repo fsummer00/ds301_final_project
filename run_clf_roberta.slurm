@@ -6,10 +6,10 @@
 #SBATCH --error=/scratch/yl5865/ds301_final_project/result.err
 #SBATCH --export=ALL
 #SBATCH --account=ds_ga_1012_2022sp
-#SBATCH --partition=n1s8-t4-1
+#SBATCH --partition=n1s8-v100-1
 #SBATCH --time=04:00:00
 #SBATCH --gres=gpu:1
-#SBATCH --mem=50G
+#SBATCH --mem=20G
 #SBATCH -c 4
 #SBATCH --mail-user=yl5865@nyu.edu
 #SBATCH --mail-type=All
@@ -17,7 +17,7 @@
 
 ## Run your hyperparameter search in a singularity container. Remember to
 ## activate your Conda environment in the container before running your Python script.
-singularity exec --nv --bind /scratch/yl5865 --overlay /scratch/y5865/overlay-25GB-500K.ext3:ro /scratch/yl5865/cuda11.4.2-cudnn8.2.4-devel-ubuntu20.04.3.sif /bin/bash -c "
+singularity exec --nv --bind /scratch/yl5865 --overlay /scratch/yl5865/overlay-25GB-500K.ext3:ro /scratch/yl5865/cuda11.4.2-cudnn8.2.4-devel-ubuntu20.04.3.sif /bin/bash -c "
 source /ext3/env.sh
 python run_clf_roberta.py
 "
